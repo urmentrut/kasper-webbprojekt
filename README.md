@@ -64,33 +64,33 @@ Designen ska efterlikna det klassiska RuneScape-temat med en nostalgisk och imme
 
 # 📊 Databasstruktur
 
-### Om applikationen använder en databas, beskriv dess struktur här.
 
-### Tabell/Samling
 
-### Beskrivning
+## Tabell/Samling
 
-### players
+## Beskrivning
+
+# players
 
 ### Innehåller spelarkonton och statistik
 
-### leaderboards
+# leaderboards
 
 ### Rankinglistor baserat på färdigheter
 
-### items_tracker
+# items_tracker
 
 ### Live-tracking av nyligen sålda föremål och deras priser
 
-### questlogs
+# questlogs
 
 ### Dokumenterar slutförda och pågående quests
 
-### bosstracker
+# bosstracker
 
 ### Visar vilka mobs en spelare har dödat och hur många
 
-### achievements
+# achievements
 
 ### Spelarnas prestationer och milstolpar
 
