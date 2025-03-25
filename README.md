@@ -1,12 +1,5 @@
 # kasper-webbprojekt
 
-### Detta är ett projekt där man kan se OSRS statistik.
-
-### Font: runescape UF
-
-
-
-
 OSRS Stats Viewer
 
 # 📌 Projektbeskrivning
