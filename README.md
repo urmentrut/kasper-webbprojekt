@@ -42,56 +42,56 @@ Designen ska efterlikna det klassiska RuneScape-temat med en nostalgisk och imme
 
 # 🔄 Branch Workflow
 
-Skapa en ny feature/-branch
+### Skapa en ny feature/-branch
 
-Utveckla och testa
+### Utveckla och testa
 
-Skapa en Pull Request (PR) till dev
+### Skapa en Pull Request (PR) till dev
 
-Granskning och testning av teamet
+### Granskning och testning av teamet
 
-Mergas till main efter godkännande
+### Mergas till main efter godkännande
 
-✅ PR-regler
+# ✅ PR-regler
 
-PRs ska granskas av minst en gruppmedlem innan merge.
+### PRs ska granskas av minst en gruppmedlem innan merge.
 
-Beskriv tydligt vad PR:n innehåller.
+### Beskriv tydligt vad PR:n innehåller.
 
-Testa koden innan du skickar in PR:n.
+### Testa koden innan du skickar in PR:n.
 
-Om en PR löser en issue, referera till den i beskrivningen.
+### Om en PR löser en issue, referera till den i beskrivningen.
 
-📊 Databasstruktur
+# 📊 Databasstruktur
 
-Om applikationen använder en databas, beskriv dess struktur här.
+### Om applikationen använder en databas, beskriv dess struktur här.
 
-Tabell/Samling
+### Tabell/Samling
 
-Beskrivning
+### Beskrivning
 
-players
+### players
 
-Innehåller spelarkonton och statistik
+### Innehåller spelarkonton och statistik
 
-leaderboards
+### leaderboards
 
-Rankinglistor baserat på färdigheter
+### Rankinglistor baserat på färdigheter
 
-items_tracker
+### items_tracker
 
-Live-tracking av nyligen sålda föremål och deras priser
+### Live-tracking av nyligen sålda föremål och deras priser
 
-questlogs
+### questlogs
 
-Dokumenterar slutförda och pågående quests
+### Dokumenterar slutförda och pågående quests
 
-bosstracker
+### bosstracker
 
-Visar vilka mobs en spelare har dödat och hur många
+### Visar vilka mobs en spelare har dödat och hur många
 
-achievements
+### achievements
 
-Spelarnas prestationer och milstolpar
+### Spelarnas prestationer och milstolpar
 
 
