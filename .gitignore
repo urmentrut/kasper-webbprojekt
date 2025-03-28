@@ -5,3 +5,7 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+
+
+#Jag lägger till venv för att slippa tusentals filer
+venv/
