@@ -1,41 +1,20 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
-import Header from './components/Header';
-
-
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';  // Import React Router
+import Header from './components/Header';  // Import the Header component
+import Home from './pages/Home';  // Import the Home page component
+import About from './pages/About';  // Import the About page component
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <Header />  {/* Add the Header component here */}
+    <Router>
+      {/* Header will be displayed on every page */}
+      <Header />  
 
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      {/* Define the routes for each page */}
+      <Routes>
+        <Route path="/" element={<Home />} />  {/* Home page */}
+        <Route path="/about" element={<About />} />  {/* About page */}
+      </Routes>
+    </Router>
   );
 }
 
