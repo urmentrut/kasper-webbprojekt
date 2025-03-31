@@ -6,7 +6,6 @@ const Header = () => {
     <header>
       <h1>OSRS Stats Viewer</h1>
       <nav>
-        <Link to="/">Hem</Link>
         <Link to="/live-tracker">Live Tracker</Link>
         <Link to="/character-stats">Character Stats</Link>
         <Link to="/questlogs">Quest Logs</Link>
