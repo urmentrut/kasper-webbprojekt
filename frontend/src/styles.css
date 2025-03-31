@@ -1,0 +1,32 @@
+/* Runescape Tema */
+@font-face {
+    font-family: 'RuneScape UF';
+    src: url('/fonts/Runescape-UF.ttf') format('truetype');
+  }
+  
+  body {
+    background-color: rgb(60, 45, 30); /* Mörk brun */
+    color: rgb(200, 170, 90); /*  texten */
+    font-family: 'RuneScape UF', Arial, sans-serif;
+    text-align: center;
+  }
+  
+  header {
+    background-color: rgb(102, 85, 51); /* Ljus brunn */
+    padding: 15px;
+  }
+  
+  nav a {
+    color: rgb(200, 170, 90);
+    text-decoration: none;
+    margin: 10px;
+    font-weight: bold;
+    padding: 5px 15px;
+    border-radius: 5px;
+  }
+  
+  nav a:hover {
+    color: white;
+    background-color: rgba(200, 170, 90, 0.3);
+  }
+  

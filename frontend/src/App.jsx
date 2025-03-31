@@ -1,18 +1,24 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';  // Import React Router
-import Header from './components/Header';  // Import the Header component
-import Home from './pages/Home';  // Import the Home page component
-import About from './pages/About';  // Import the About page component
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';  
+import Header from './components/Header';  
+import LiveTracker from './pages/LiveTracker';
+import CharacterStats from './pages/CharacterStats';
+import QuestLogs from './pages/QuestLogs';
+import BossTracker from './pages/BossTracker';
+import Achievements from './pages/Achievements';
+
+
+import './styles.css';     
 
 function App() {
   return (
     <Router>
-      {/* Header will be displayed on every page */}
-      <Header />  
-
-      {/* Define the routes for each page */}
+      <Header />
       <Routes>
-        <Route path="/" element={<Home />} />  {/* Home page */}
-        <Route path="/about" element={<About />} />  {/* About page */}
+        <Route path="/live-tracker" element={<LiveTracker />} />
+        <Route path="/character-stats" element={<CharacterStats />} />
+        <Route path="/questlogs" element={<QuestLogs />} />
+        <Route path="/bosstracker" element={<BossTracker />} />
+        <Route path="/achievements" element={<Achievements />} />
       </Routes>
     </Router>
   );
