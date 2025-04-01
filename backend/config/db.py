@@ -1,5 +1,3 @@
-#from backend import create_app
-
 import os
 from pymongo import MongoClient
 #from dotenv import load_dotenv
@@ -11,12 +9,6 @@ client = MongoClient(connection_string)
 db_name = "kasper"
 db = client[db_name]
 
-
-
-app = create_app()
-
-print(db.characterstats.find())
-
-if __name__ == "__main__":
-    app.run()
-
+stats = db.characterstats.find()
+for stat in stats:
+    print(stat)
