@@ -1,0 +1,35 @@
+/* src/pages/Home.css */
+
+.home-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.home-header {
+    background-color: #6E4B34; /* Light brown background */
+    color: white;
+    padding: 20px;
+    border-radius: 8px; /* Optional: adds rounded corners to the header */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow for effect */
+}
+
+.home-nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.home-nav li {
+    display: inline;
+    margin: 10px;
+}
+
+.home-nav a {
+    color: gold; /* Gold-colored links */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.home-nav a:hover {
+    text-decoration: underline;
+}
+
