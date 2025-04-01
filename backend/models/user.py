@@ -10,8 +10,8 @@ class User:
             "username": self.username,
             "password": self.password
         }
-        return mongo.db.users.insert_one(user_data)
+        return db.users.insert_one(user_data)
 
 
     def find_by_username(username):
-        return mongo.db.users.find_one({"username": username})
+        return db.users.find_one({"username": username})
