@@ -1,22 +1,26 @@
-#from backend import create_app
-
 import os
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 from pymongo import MongoClient
-#from dotenv import load_dotenv
 
-#connection_string = f"{os.getenv('MONGODB_URI')}"
-#connection_string = "mongodb+srv://burakandic:76i8bewnz8fjUGnf@cluster0.rpnavzg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+# Connect to MongoDB
 connection_string = "mongodb://localhost:27017"
 client = MongoClient(connection_string)
 db_name = "kasper"
 db = client[db_name]
 
+# Create Flask app
+def create_app():
+    app = Flask(__name__)
+    CORS(app)  # Allow frontend to communicate with backend
 
+    # Import and register your routes
+    from routes.user_routes import user_routes  # Import the user_routes blueprint
+    app.register_blueprint(user_routes, url_prefix="/api")  # Register blueprint with url_prefix "/api"
+
+    return app
 
 app = create_app()
 
-print(db.characterstats.find())
-
 if __name__ == "__main__":
-    app.run()
-
+    app.run(debug=True)

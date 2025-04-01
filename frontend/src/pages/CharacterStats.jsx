@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-
 import React, { useState } from "react";
 import axios from "axios";
 
@@ -7,6 +6,8 @@ const CharacterStats = () => {
   const [username, setUsername] = useState("");
   const [stats, setStats] = useState(null);
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+  const [savedStats, setSavedStats] = useState([]);
 
   const handleInputChange = (e) => {
     setUsername(e.target.value);
@@ -20,14 +21,42 @@ const CharacterStats = () => {
     }
 
     setError("");
+    setMessage("");
 
     try {
       const response = await axios.get(
         `https://templeosrs.com/api/player_stats.php?player=${username}`
       );
+
       setStats(response.data);
+
+      // Send fetched stats to backend
+      await saveStatsToBackend(response.data);
     } catch (error) {
       setError("Failed to fetch stats. Please check the username.");
+    }
+  };
+
+  // Send stats to Flask backend
+  const saveStatsToBackend = async (statsData) => {
+    try {
+      await axios.post("http://localhost:5000/api/save-stats", {
+        username,
+        stats: statsData.data,
+      });
+      setMessage("Stats saved successfully!");
+    } catch (error) {
+      setError("Failed to save stats to the database.");
+    }
+  };
+
+  // Fetch saved stats from backend
+  const fetchSavedStats = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/get-stats");
+      setSavedStats(response.data);
+    } catch (error) {
+      setError("Failed to fetch saved stats.");
     }
   };
 
@@ -41,17 +70,16 @@ const CharacterStats = () => {
         value={username}
         onChange={handleInputChange}
       />
-      
-      {/* Button */}
       <button onClick={fetchStats}>Fetch Stats</button>
+      <button onClick={fetchSavedStats}>Get Saved Stats</button>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
+      {message && <p style={{ color: "green" }}>{message}</p>}
 
       {stats && (
         <div>
           <h3>Stats for {stats.data.info.Username}</h3>
           <ul>
-            {/* Stats */}
             <li>Attack Level: {stats.data.Attack_level}</li>
             <li>Defense Level: {stats.data.Defence_level}</li>
             <li>Strength Level: {stats.data.Strength_level}</li>
@@ -75,6 +103,19 @@ const CharacterStats = () => {
             <li>Runecrafting Level: {stats.data.Runecraft_level}</li>
             <li>Hunter Level: {stats.data.Hunter_level}</li>
             <li>Construction Level: {stats.data.Construction_level}</li>
+          </ul>
+        </div>
+      )}
+
+      {savedStats.length > 0 && (
+        <div>
+          <h3>Saved Stats from Database</h3>
+          <ul>
+            {savedStats.map((user, index) => (
+              <li key={index}>
+                <strong>{user.username}</strong>: Attack {user.stats.Attack_level}, Defense {user.stats.Defence_level}
+              </li>
+            ))}
           </ul>
         </div>
       )}
