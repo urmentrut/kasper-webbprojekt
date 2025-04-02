@@ -40,7 +40,7 @@ const Achievements = () => {
         ))}
       </ul>
     </div>
-);
+  );
 };
 
 export default Achievements;
