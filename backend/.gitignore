@@ -1,0 +1,18 @@
+# Ignorera virtuella miljöer
+venv/
+.env/
+
+# Ignorera Python bytecode-filer
+__pycache__/
+*.pyc
+
+# Ignorera loggfiler
+*.log
+
+# Ignorera distributions- eller byggmappar
+build/
+dist/
+
+# Ignorera eventuella andra temporära filer eller mappar som kan uppstå
+*.bak
+*.swp
