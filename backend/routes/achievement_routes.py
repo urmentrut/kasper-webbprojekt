@@ -10,4 +10,4 @@ def get_achievements(username):
     achievements = get_player_achievement(username)
    # print(achievements)
     #return jsonify({"username": username, "achievements": ["achievements"]})
-    return {"achievements": achievements}
+    return jsonify({"achievements": achievements})
