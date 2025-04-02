@@ -4,3 +4,5 @@ flask-SQLAlchemy
 pymongo
 dnspython
 python-dotenv
+flask_pymongo
+flask_jwt_extended

@@ -1,7 +1,8 @@
-from database import mongo
+from config.db import db  
 
 class PlayerStats:
     @staticmethod
     def get_player_stats(username):
-        player_stats = mongo.db.players.find_one({"username": username})
+        # Hämta spelarstatistik från "player_stats" collection
+        player_stats = db.player_stats.find_one({"username": username})
         return player_stats
