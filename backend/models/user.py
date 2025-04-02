@@ -1,4 +1,4 @@
-from backend.config.db import db
+from config.db import db
 
 class User:
     def __init__(self, username, password):

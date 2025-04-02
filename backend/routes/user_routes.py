@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from pymongo import MongoClient
-from backend.controllers.user_controller import create_user
+from controllers.user_controller import create_user
 
 # Connect to MongoDB
 connection_string = "mongodb://localhost:27017"
@@ -31,7 +31,7 @@ def get_stats():
 
 @user_routes.route("/create-user", methods=["POST"])
 def post_user():
-
+    print("test")
     data = request.get_json()
 
     if not data or 'username' not in data or 'password' not in data:

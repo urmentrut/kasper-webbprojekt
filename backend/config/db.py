@@ -1,14 +1,21 @@
 import os
 from pymongo import MongoClient
-#from dotenv import load_dotenv
+from dotenv import load_dotenv
 
-#connection_string = f"{os.getenv('MONGODB_URI')}"
-#connection_string = "mongodb+srv://burakandic:76i8bewnz8fjUGnf@cluster0.rpnavzg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-connection_string = "mongodb://localhost:27017"
+# Ladda miljövariabler från .env-fil
+load_dotenv()
+
+# Hämta MongoDB URI från miljövariabeln
+connection_string = os.getenv("MONGODB_URI", "mongodb://localhost:27017")
+
+# Skapa MongoDB-klient
 client = MongoClient(connection_string)
-db_name = "kasper"
+
+# Välj din databas
+db_name = "kasper"  # Ändra till din databas namn om nödvändigt
 db = client[db_name]
 
+# Testa anslutning genom att skriva ut data från collection 'characterstats'
 stats = db.characterstats.find()
 for stat in stats:
     print(stat)
