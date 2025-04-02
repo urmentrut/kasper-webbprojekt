@@ -1,14 +1,15 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from database import mongo
-from config import Config
+from config.db import db
 from routes.auth_routes import auth_bp
 from routes.player_routes import player_bp
 from routes.questlog_routes import questlog_bp
 from routes.ge_price_tracker_routes import ge_price_tracker_bp
 from routes.achievement_routes import achievement_bp
 from routes.bosslog_routes import bosslog_bp
+
 
 app = Flask(__name__)
 app.config.from_object(Config)
