@@ -18,6 +18,7 @@ const Home = () => {
                     <li><Link to="/QuestLogs">Quest Logs</Link></li>
                     <li><Link to="/BossTracker">Boss Tracker</Link></li>
                     <li><Link to="/Achievements">Achievements</Link></li>
+                    <li><Link to="/Players">Players CRUD</Link></li> {/* Add the link here */}
                 </ul>
             </nav>
         </div>

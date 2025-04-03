@@ -1,31 +1,48 @@
-import axios from "axios";
+// api.js
+/* eslint-disable */
 
-const API_URL = "http://localhost:5000"
+// src/api.js
 
-export const registerUser = async (username, password) => {
-    return axios.post(`${API_URL}/auth/register`, { username, password });
-  };
-  
-  export const loginUser = async (username, password) => {
-    return axios.post(`${API_URL}/auth/login`, { username, password });
-  };
-  
-  export const getPlayerStats = async (username) => {
-    return axios.get(`https://secure.runescape.com/m=hiscore_oldschool/index_lite.json?player=${username}`);
-  };
-  
-  export const getQuestlog = async (username) => {
-    return axios.get(`https://apps.runescape.com/runemetrics/quests?user=${username}`);
-  };
-  
-  export const getItemPrice = async (itemName) => {
-    return axios.get(`https://secure.runescape.com/m=itemdb_oldschool/api/catalogue/items.json?alpha=${itemName[0].toLowerCase()}`);
+import axios from 'axios';
+
+const API_URL = 'http://localhost:5000/player'; // Adjust the URL if needed
+
+// Fetch player data by username
+export const fetchPlayer = async (username) => { // Renamed from getPlayer to fetchPlayer
+  try {
+    const response = await axios.get(`${API_URL}/${username}`);
+    return response.data;
+  } catch (error) {
+    throw new Error("Player not found");
+  }
 };
-  
-  export const getAchievements = async (username) => {
-    return axios.get(`${API_URL}/achievements/${username}`);
-  };
-  
-  export const getBosslog = async (username) => {
-    return axios.get(`https://apps.runescape.com/runemetrics/bosslog?user=${username}`);
+
+// Create a new player
+export const createPlayer = async (playerData) => {
+  try {
+    const response = await axios.post(API_URL, playerData);
+    return response.data;
+  } catch (error) {
+    throw new Error("Failed to create player");
+  }
+};
+
+// Update player data
+export const updatePlayer = async (username, playerData) => {
+  try {
+    const response = await axios.put(`${API_URL}/${username}`, playerData);
+    return response.data;
+  } catch (error) {
+    throw new Error("Failed to update player");
+  }
+};
+
+// Delete player data
+export const deletePlayer = async (username) => {
+  try {
+    const response = await axios.delete(`${API_URL}/${username}`);
+    return response.data;
+  } catch (error) {
+    throw new Error("Failed to delete player");
+  }
 };
