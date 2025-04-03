@@ -23,7 +23,7 @@ export const registerUser = async (username, password) => {
 };
   
   export const getAchievements = async (username) => {
-    return axios.get(`${API_URL}/achievements/${username}`);
+    return axios.get(`${API_URL}/achievements/players/${username}/achievements`);
   };
   
   export const getBosslog = async (username) => {

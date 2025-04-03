@@ -10,11 +10,12 @@ const Achievements = () => {
   useEffect(() => {
     const fetchAchievements = async () => {
       try {
-        // Här anropar vi Flask backend
-        const response = await axios.get('http://127.0.0.1:5000/achievements/Alice');
-        setAchievements(response.data.achievements);
+        // ✅ Rätt endpoint!
+        const response = await axios.get('http://127.0.0.1:5000/achievements/players/Alice/achievements');
+        setAchievements(response.data); // ✅ data är redan en lista
       } catch (err) {
-        setError("Något gick fel. Försök igen senare.");
+        console.error("Fel vid hämtning:", err); // För utvecklare
+        setError("Något gick fel. Försök igen senare."); // För användare
       } finally {
         setLoading(false);
       }
@@ -32,15 +33,15 @@ const Achievements = () => {
   }
 
   return (
-    <div>
-      <h2>Alice's Achievements</h2>
-      <ul>
+    <div className="p-4 max-w-xl mx-auto text-white">
+      <h2 className="text-2xl font-bold mb-4">Alice's Achievements</h2>
+      <ul className="space-y-2">
         {achievements.map((achievement, index) => (
-          <li key={index}>{achievement}</li>
+          <li key={index} className="bg-gray-800 p-3 rounded shadow">{achievement}</li>
         ))}
       </ul>
     </div>
-);
+  );
 };
 
 export default Achievements;
