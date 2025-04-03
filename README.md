@@ -1,4 +1,4 @@
-# kasper-webbprojekt
+# osrs-tracker
 
 OSRS Stats Viewer
 
