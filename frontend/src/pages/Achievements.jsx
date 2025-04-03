@@ -104,12 +104,6 @@ const Achievements = () => {
                   className="bg-gray-800 p-4 rounded shadow flex justify-between items-center"
                 >
                   <span>{achievement}</span>
-                  <button
-                    onClick={() => handleDeleteAchievement(achievement)}
-                    className="text-red-500 hover:text-red-600 active:scale-95 transition-transform duration-150"
-                  >
-                    🗑️
-                  </button>
                 </li>
               ))}
             </ul>
