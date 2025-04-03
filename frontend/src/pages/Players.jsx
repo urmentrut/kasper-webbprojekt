@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { fetchPlayer, createPlayer, updatePlayer, deletePlayer } from "../api"; 
+import { getPlayer, createPlayer, updatePlayer, deletePlayer } from "../components/playerApi";
+ 
 
 const Players = () => {
   const [playerName, setPlayerName] = useState("");
@@ -13,7 +14,7 @@ const Players = () => {
 
   useEffect(() => {
     if (playerName) {
-      fetchPlayer(playerName)
+        getPlayer(playerName)
         .then((data) => setPlayerData(data))
         .catch((error) => console.error("Error fetching player:", error));
     }
@@ -50,7 +51,7 @@ const Players = () => {
           value={playerName}
           onChange={(e) => setPlayerName(e.target.value)}
         />
-        <button onClick={() => fetchPlayer(playerName)}>Get Player</button>
+        <button onClick={() => getPlayer(playerName)}>Get Player</button>
       </div>
       <div>
         {playerData && (

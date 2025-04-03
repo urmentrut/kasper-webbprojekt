@@ -14,7 +14,7 @@ client = MongoClient(connection_string)
 # Välj din databas
 db_name = "osrs-tracker"  # Ändra till din databas namn om nödvändigt
 db = client[db_name]
-
+player_collection = db["players"]
 # Testa anslutning genom att skriva ut data från collection 'characterstats'
 stats = db.player_stats.find()
 for stat in stats:
