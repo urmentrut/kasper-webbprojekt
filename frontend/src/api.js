@@ -46,3 +46,11 @@ export const deletePlayer = async (username) => {
     throw new Error("Failed to delete player");
   }
 };
+
+export const getAchievements = async (username) => {
+  return axios.get(`${API_URL}/achievements/players/${username}/achievements`);
+};
+
+export const getBosslog = async (username) => {
+  return axios.get(`https://apps.runescape.com/runemetrics/bosslog?user=${username}`);
+};

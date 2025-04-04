@@ -16,7 +16,7 @@ from config.db import player_collection
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://localhost:27017/osrs-tracker"
-CORS(app, resources={r"/*": {"origins": ["http://localhost:5173"]}})
+CORS(app, origins=["http://localhost:5173", "http://localhost:5174"])
 mongo = PyMongo(app)
 JWTManager(app)
 mongo.init_app(app)
