@@ -7,7 +7,7 @@ from flask_pymongo import PyMongo
 #from routes.auth_routes import auth_bp
 from routes.player_routes import player_bp
 from routes.questlog_routes import questlog_bp
-from routes.ge_price_tracker_routes import ge_price_tracker_bp
+from routes.livetracker_routes import livetracker_bp
 from routes.achievement_routes import achievement_bp
 from routes.bosslog_routes import bosslog_bp
 from routes.user_routes import user_bp
@@ -25,7 +25,7 @@ mongo.init_app(app)
 #app.register_blueprint(auth_bp, url_prefix="/auth")
 app.register_blueprint(player_bp, url_prefix="/player")  #Burak
 app.register_blueprint(questlog_bp, url_prefix="/questlog")
-app.register_blueprint(ge_price_tracker_bp, url_prefix="/ge-price-tracker")
+app.register_blueprint(livetracker_bp, url_prefix="/livetracker")
 app.register_blueprint(achievement_bp, url_prefix="/achievements")
 app.register_blueprint(bosslog_bp, url_prefix="/bosslog")
 app.register_blueprint(user_bp, url_prefix="/user")
