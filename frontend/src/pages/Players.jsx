@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { getPlayer, createPlayer, updatePlayer, deletePlayer } from "../components/playerApi";
- 
 
 const Players = () => {
   const [playerName, setPlayerName] = useState("");
@@ -14,31 +13,39 @@ const Players = () => {
 
   useEffect(() => {
     if (playerName) {
-        getPlayer(playerName)
-        .then((data) => setPlayerData(data))
+      getPlayer(playerName)
+        .then((data) => {
+          if (data) setPlayerData(data);
+        })
         .catch((error) => console.error("Error fetching player:", error));
     }
   }, [playerName]);
 
-  const handleCreatePlayer = () => {
-    createPlayer(newPlayerData).then((response) => {
-      console.log(response);
-      setPlayerData(response); 
-    });
+  const handleCreatePlayer = async () => {
+    try {
+      const response = await createPlayer(newPlayerData);
+      if (response) setPlayerData(response);
+    } catch (error) {
+      console.error("Error creating player:", error);
+    }
   };
 
-  const handleUpdatePlayer = () => {
-    updatePlayer(playerName, newPlayerData).then((response) => {
-      console.log(response);
-      setPlayerData(response); 
-    });
+  const handleUpdatePlayer = async () => {
+    try {
+      const response = await updatePlayer(playerName, newPlayerData);
+      if (response) setPlayerData(response);
+    } catch (error) {
+      console.error("Error updating player:", error);
+    }
   };
 
-  const handleDeletePlayer = () => {
-    deletePlayer(playerName).then((response) => {
-      console.log(response);
-      setPlayerData(null); 
-    });
+  const handleDeletePlayer = async () => {
+    try {
+      const response = await deletePlayer(playerName);
+      if (response) setPlayerData(null);
+    } catch (error) {
+      console.error("Error deleting player:", error);
+    }
   };
 
   return (
@@ -77,7 +84,7 @@ const Players = () => {
           placeholder="Highscore"
           value={newPlayerData.highscore}
           onChange={(e) =>
-            setNewPlayerData({ ...newPlayerData, highscore: e.target.value })
+            setNewPlayerData({ ...newPlayerData, highscore: Number(e.target.value) })
           }
         />
         <input
@@ -85,7 +92,7 @@ const Players = () => {
           placeholder="Quests Completed"
           value={newPlayerData.quests_completed}
           onChange={(e) =>
-            setNewPlayerData({ ...newPlayerData, quests_completed: e.target.value })
+            setNewPlayerData({ ...newPlayerData, quests_completed: Number(e.target.value) })
           }
         />
         <button onClick={handleCreatePlayer}>Create Player</button>

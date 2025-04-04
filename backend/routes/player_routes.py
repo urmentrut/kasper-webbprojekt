@@ -17,7 +17,7 @@ def fetch_player(username):
     return jsonify({"error": "Player not found"}), 404
 
 # Create a New Player
-@player_bp.route("/", methods=["POST"])
+@player_bp.route("", methods=["POST"])
 def create_player():
     data = request.get_json()
     print("Data comes in", data)
