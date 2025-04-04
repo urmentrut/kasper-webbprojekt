@@ -1,97 +1,96 @@
-# osrs-tracker
+# 🐙 OSRS Tracker
+## 📌 Projektbeskrivning
 
-OSRS Stats Viewer
+Detta är ett fullstack-projekt för att analysera och visualisera data från Old School RuneScape (OSRS). Användare kan söka på spelarkonton, spåra boss kills, se questloggar, se achievements och använda en livetracker för att se nyligen sålda föremål. Både backend och frontend är uppbyggda för enkel utveckling, testning och utbyggnad.
 
-# 📌 Projektbeskrivning
+# ⚙️ Installation och Start
 
-Detta är ett projekt där användare kan se och analysera statistik från Old School RuneScape (OSRS). Applikationen hämtar och presenterar information om spelarkonton, ranking och prestationer på ett tydligt och användarvänligt sätt.
+### Backend (Python + Flask + MongoDB)
+### 1. Kloning av projektet:
+[git clone https://github.com/urmentrut/osrs-tracker](https://github.com/urmentrut/osrs-tracker.git)
 
-## 🔹 Funktioner
+cd osrs-tracker/backend
 
-### Live Tracker: Visar föremål som precis sålts och deras pris.
+### 2. Skapa virtuell miljö & installera beroenden:
 
-### Character Stats: Möjlighet att ta fram statistik för en specifik spelarkaraktär.
+python -m venv venv
 
-### Questlogs: Dokumenterar slutförda och pågående quests.
+MacBook: source venv/bin/activate eller för Windows: venv\Scripts\activate
 
-### Bosstracker: Visar hur många och vilka mobs en karaktär har dödat.
+pip install -r requirements.txt
 
-### Achievements: Spelarnas prestationer och milstolpar.
+### 3. Starta Flask-servern:
+python app.py
+Flask körs på http://localhost:5000
+Frontend (React + Vite)
+### 4. Gå till frontend-mappen:
+cd osrs-tracker/frontend
+### 5. Installera Node-paket:
+npm install
+### 6. Starta frontend-servern:
+npm run dev
+### Frontend körs på http://localhost:5173
 
 # 🎨 Grafisk Profil
 
-## Font: RuneScape UF
 
-## Färgschema:
+Font RuneScape UF
 
-### Mörkbrun: rgb(60, 45, 30)
+Bakgrundsfärg Mörkbrun: rgb(60, 45, 30)
 
-### Ljusbrun: rgb(102, 85, 51)
+Elementfärg Ljusbrun: rgb(102, 85, 51)
 
-### Guldfärgad text: rgb(200, 170, 90)
+Textfärg Guld: rgb(200, 170, 90)
 
-Designen ska efterlikna det klassiska RuneScape-temat med en nostalgisk och immersiv känsla.
+Designen efterliknar klassiska RuneScape-gränssnitt med fokus på en nostalgisk och immersiv känsla.
 
 # 🌿 Branchstruktur
 
-### main → Stabil kod, endast färdigtestad och granskad kod slås in här.
-
-### dev → Huvudgren för utveckling där nya funktioner och fixar testas.
-
-### feature/{feature-namn} → Separata feature-branscher för nya funktioner.
+* dev → Stabil kod, färdigtestad.
+* ny branch → Aktiv utvecklingsbranch.
 
 # 🔄 Branch Workflow
 
-### Skapa en ny feature/-branch
-
-### Utveckla och testa
-
-### Skapa en Pull Request (PR) till dev
-
-### Granskning och testning av teamet
-
-### Mergas till main efter godkännande
+1. Skapa en ny feature/branch
+2. Utveckla och testa lokalt
+3. Skapa en Pull Request (PR) till ny branch
+4. Granskning och testning av gruppmedlem
+5. Merge till dev efter godkännande
 
 # ✅ PR-regler
 
-### PRs ska granskas av minst en gruppmedlem innan merge.
+* PRs måste granskas av minst 1 gruppmedlem.
+* Alla PRs ska ha en beskrivande titel och sammanfattning.
+* Testa lokalt innan PR skapas.
 
-### Beskriv tydligt vad PR:n innehåller.
+# 📊 Databasstruktur (MongoDB)
 
-### Testa koden innan du skickar in PR:n.
+players
 
-### Om en PR löser en issue, referera till den i beskrivningen.
+bosslog
 
-# 📊 Databasstruktur
+questlog
 
+achievements
 
+livetracker
 
-## Tabell/Samling
+## 🗄️ Databasanvändning lokalt
 
-## Beskrivning
+För att kunna se data i applikationen (t.ex. items i livetracker eller boss kills), behöver du skapa och fylla din databas lokalt i MongoDB. Inget innehåll genereras automatiskt.
 
-# players
-
-### Innehåller spelarkonton och statistik
-
-# leaderboards
-
-### Rankinglistor baserat på färdigheter
-
-# items_tracker
-
-### Live-tracking av nyligen sålda föremål och deras priser
-
-# questlogs
-
-### Dokumenterar slutförda och pågående quests
-
-# bosstracker
-
-### Visar vilka mobs en spelare har dödat och hur många
-
-# achievements
-
-### Spelarnas prestationer och milstolpar
+## Så här gör du:
 
 
+
+Öppna MongoDB Compass.
+
+Gå till databasen osrs-tracker.
+
+Skapa collections enligt tabellen ovan (players, bosslog, questlog, achievements, livetracker.).
+
+Lägg till dokument manuellt i MongoDB Compass eller via Postman API.
+
+För att garantera resultat i Postman, analysera kod per underrubrikernas routes.py och se vilka CRUD-operationer som är tillgängliga för just den underrubriken.
+
+Exempel: Under livetracker_routes.py finns methods: "GET" och "POST"
