@@ -1,55 +1,144 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const bosses = [
-  "Zulrah", "Vorkath", "Kraken", "Cerberus", "Kree'arra", 
-  "General Graardor", "Zamorak", "Saradomin", "The Nightmare"
-];
-
-export default function BossTracker() {
+function BossTracker() {
   const [username, setUsername] = useState("");
-  const [data, setData] = useState(null);
+  const [searchName, setSearchName] = useState("");
+  const [bossList, setBossList] = useState([]);
+  const [newBoss, setNewBoss] = useState("");
 
-  const fetchMockData = () => {
-    const mockData = bosses.map(boss => ({
-      name: boss,
-      kills: Math.floor(Math.random() * 500) // Random kills between 0-500
-    }));
-    setData(mockData);
+  // GET request to fetch boss log
+  const fetchBossLog = async (usernameToSearch) => {
+    const res = await fetch(`http://localhost:5000/bosslog/${usernameToSearch}`);
+    const data = await res.json();
+
+    if (data.bosses_killed) {
+      setBossList(data.bosses_killed);
+    } else {
+      setBossList([]);
+    }
+  };
+
+  // POST request to add boss kill
+  const addBossKill = async (username, bossName) => {
+    const res = await fetch(`http://localhost:5000/bosslog/`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, boss_name: bossName }),
+    });
+    return await res.json();
+  };
+
+  const handleSearch = async () => {
+    if (!searchName.trim()) return;
+    setUsername(searchName.trim());
+    await fetchBossLog(searchName.trim());
+  };
+
+  const handleAddBoss = async () => {
+    if (!newBoss.trim() || !username) return;
+    await addBossKill(username, newBoss.trim());
+    await fetchBossLog(username);
+    setNewBoss("");
+  };
+
+  const styles = {
+    container: {
+      textAlign: "center",
+      padding: "20px",
+      backgroundColor: "#3B2A24", // Dark brown background
+      minHeight: "100vh",
+      color: "white",
+    },
+    header: {
+      backgroundColor: "#6E4B34", // Light brown
+      color: "white",
+      padding: "20px",
+      borderRadius: "8px",
+      marginBottom: "20px",
+      boxShadow: "0 4px 10px rgba(0, 0, 0, 0.15)",
+    },
+    input: {
+      padding: "10px",
+      border: "1px solid #444",
+      borderRadius: "6px",
+      width: "200px",
+      marginRight: "10px",
+      backgroundColor: "#6E4B34",
+      color: "white",
+    },
+    button: {
+      backgroundColor: "gold",
+      border: "none",
+      padding: "10px 16px",
+      borderRadius: "6px",
+      color: "#333",
+      fontWeight: "bold",
+      cursor: "pointer",
+      transition: "background-color 0.3s ease",
+    },
+    list: {
+      listStyleType: "none",
+      padding: 0,
+      marginTop: "20px",
+    },
+    listItem: {
+      margin: "10px auto",
+      padding: "10px 0",
+      width: "60%",
+      fontWeight: "600",
+      color: "white",
+      backgroundColor: "transparent",
+    },
+    section: {
+      marginBottom: "30px",
+    },
   };
 
   return (
-    <div className="min-h-screen bg-[#272727] text-gold flex flex-col items-center p-6">
-      {/* BossTracker Box with the same light brown color from your CSS */}
-      <div className="home-header mb-6">
-        BossTracker
+    <div style={styles.container}>
+      <div style={styles.header}>
+        <h2>Boss Tracker</h2>
       </div>
 
-      <div className="mb-4">
+      <div style={styles.section}>
         <input
-          className="bg-gray-800 text-white border border-gray-600 p-2 rounded-md"
-          placeholder="Enter username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          style={styles.input}
+          type="text"
+          placeholder="Search username"
+          value={searchName}
+          onChange={(e) => setSearchName(e.target.value)}
         />
-        <button
-          className="bg-gold text-black p-2 rounded-md mt-2 ml-2"
-          onClick={fetchMockData}
-        >
-          Fetch Data
+        <button style={styles.button} onClick={handleSearch}>
+          Search
         </button>
       </div>
 
-      {data && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-xl">
-          {data.map((boss) => (
-            <div key={boss.name} className="bg-gray-800 text-white p-4 rounded-lg shadow-lg">
-              {/* Boss name in gold */}
-              <h2 className="text-xl font-semibold text-gold">{boss.name}</h2>
-              <p className="text-lg">Kills: {boss.kills}</p>
-            </div>
-          ))}
-        </div>
+      {username && (
+        <>
+          <div style={styles.section}>
+            <input
+              style={styles.input}
+              type="text"
+              placeholder="Add boss kill"
+              value={newBoss}
+              onChange={(e) => setNewBoss(e.target.value)}
+            />
+            <button style={styles.button} onClick={handleAddBoss}>
+              Add Boss
+            </button>
+          </div>
+
+          <ul style={styles.list}>
+            {bossList.map((boss, index) => (
+              <li key={index} style={styles.listItem}>
+                {boss}
+              </li>
+            ))}
+          </ul>
+        </>
       )}
     </div>
   );
 }
+
+export default BossTracker;
