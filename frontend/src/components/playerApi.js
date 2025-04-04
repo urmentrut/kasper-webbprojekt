@@ -1,29 +1,27 @@
-// api.js
-/* eslint-disable */
-
-// src/api.js
-
+// src/api/playerApi.js
 import axios from 'axios';
 
 const API_URL = 'http://localhost:5000/player'; // Adjust the URL if needed
 
-// Fetch player data by username
-export const fetchPlayer = async (username) => { // Renamed from getPlayer to fetchPlayer
+// Get player data by username
+export const getPlayer = async (username) => {
   try {
     const response = await axios.get(`${API_URL}/${username}`);
     return response.data;
   } catch (error) {
-    throw new Error("Player not found");
+    console.error('Error fetching player data:', error);
+    return null;
   }
 };
 
-// Create a new player
+// Add a new player
 export const createPlayer = async (playerData) => {
   try {
     const response = await axios.post(API_URL, playerData);
     return response.data;
   } catch (error) {
-    throw new Error("Failed to create player");
+    console.error('Error adding player:', error);
+    return null;
   }
 };
 
@@ -33,16 +31,18 @@ export const updatePlayer = async (username, playerData) => {
     const response = await axios.put(`${API_URL}/${username}`, playerData);
     return response.data;
   } catch (error) {
-    throw new Error("Failed to update player");
+    console.error('Error updating player:', error);
+    return null;
   }
 };
 
-// Delete player data
+// Delete a player
 export const deletePlayer = async (username) => {
   try {
     const response = await axios.delete(`${API_URL}/${username}`);
     return response.data;
   } catch (error) {
-    throw new Error("Failed to delete player");
+    console.error('Error deleting player:', error);
+    return null;
   }
 };

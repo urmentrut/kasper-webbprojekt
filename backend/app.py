@@ -12,6 +12,7 @@ from routes.achievement_routes import achievement_bp
 from routes.bosslog_routes import bosslog_bp
 from routes.user_routes import user_bp
 from models.player_stats import PlayerStats
+from config.db import player_collection
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://localhost:27017/osrs-tracker"
@@ -22,15 +23,12 @@ mongo.init_app(app)
 
 # Registrera alla rutter
 #app.register_blueprint(auth_bp, url_prefix="/auth")
-app.register_blueprint(player_bp, url_prefix="/player") #Burak
+app.register_blueprint(player_bp, url_prefix="/player")  #Burak
 app.register_blueprint(questlog_bp, url_prefix="/questlog")
 app.register_blueprint(ge_price_tracker_bp, url_prefix="/ge-price-tracker")
 app.register_blueprint(achievement_bp, url_prefix="/achievements")
 app.register_blueprint(bosslog_bp, url_prefix="/bosslog")
 app.register_blueprint(user_bp, url_prefix="/user")
-
-
-
 
 if __name__ == "__main__":
     app.run(debug=True)
