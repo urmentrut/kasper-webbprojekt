@@ -10,7 +10,7 @@ const Home = () => {
                 <h1>Runetracker</h1>
                 <p>Your journey starts here. Explore your character's stats, quests, achievements, and more!</p>
             </header>
-
+            
             <nav className="home-nav">
                 <ul>
                     <li><Link to="/LiveTracker">Live Tracker</Link></li>
