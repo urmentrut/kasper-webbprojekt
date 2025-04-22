@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { fetchBossLog, addBossKill } from './BossTracker.js';
+import { fetchBossLog, addBossKill } from "../services/BossTracker.js";
 import './BossTracker.css';
 
 function BossTracker() {
