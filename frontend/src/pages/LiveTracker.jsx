@@ -1,20 +1,17 @@
 import { useState, useEffect } from "react";
 import "./LiveTracker.css";
-import { fetchItems, addItem } from "../services/LiveTracker";
+import { fetchItems, createItem } from "../services/LiveTracker";
 
 function LiveTracker() {
   const [items, setItems] = useState([]);
   const [newItemName, setNewItemName] = useState("");
   const [newItemPrice, setNewItemPrice] = useState("");
 
-  const handleAddItem = async () => {
-    if (!newItemName.trim() || !newItemPrice.trim()) return;
-
-    await addItem(newItemName, newItemPrice);
-    setNewItemName("");
-    setNewItemPrice("");
+  useEffect(() => {
     loadItems();
-  };
+    const interval = setInterval(loadItems, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   const loadItems = async () => {
     try {
@@ -25,11 +22,18 @@ function LiveTracker() {
     }
   };
 
-  useEffect(() => {
-    loadItems();
-    const interval = setInterval(loadItems, 5000);
-    return () => clearInterval(interval);
-  }, []);
+  const addItem = async () => {
+    if (!newItemName.trim() || !newItemPrice.trim()) return;
+
+    try {
+      await createItem(newItemName, newItemPrice);
+      setNewItemName("");
+      setNewItemPrice("");
+      loadItems();
+    } catch (error) {
+      console.error("Error adding item:", error);
+    }
+  };
 
   return (
     <div className="container">
@@ -52,7 +56,7 @@ function LiveTracker() {
           value={newItemPrice}
           onChange={(e) => setNewItemPrice(e.target.value)}
         />
-        <button className="button" onClick={handleAddItem}>
+        <button className="button" onClick={addItem}>
           Add Sale
         </button>
       </div>
