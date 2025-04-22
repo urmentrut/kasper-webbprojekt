@@ -1,120 +1,64 @@
 import { useState, useEffect } from "react";
+import "./LiveTracker.css";
+import { fetchItems, addItem } from "../services/LiveTracker";
 
 function LiveTracker() {
   const [items, setItems] = useState([]);
   const [newItemName, setNewItemName] = useState("");
   const [newItemPrice, setNewItemPrice] = useState("");
 
-  // Fetch all items
-  const fetchItems = async () => {
+  const handleAddItem = async () => {
+    if (!newItemName.trim() || !newItemPrice.trim()) return;
+
+    await addItem(newItemName, newItemPrice);
+    setNewItemName("");
+    setNewItemPrice("");
+    loadItems();
+  };
+
+  const loadItems = async () => {
     try {
-      const res = await fetch("http://localhost:5000/livetracker/");
-      const data = await res.json();
+      const data = await fetchItems();
       setItems(data);
     } catch (error) {
       console.error("Error fetching items:", error);
     }
   };
 
-  // Add new item (Create)
-  const addItem = async () => {
-    if (!newItemName.trim() || !newItemPrice.trim()) return;
-
-    const res = await fetch("http://localhost:5000/livetracker/", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        item_name: newItemName.trim(),
-        price_sold: parseInt(newItemPrice),
-      }),
-    });
-
-    const data = await res.json();
-    console.log(data);
-
-    setNewItemName("");
-    setNewItemPrice("");
-    fetchItems(); // Refresh the list
-  };
-
   useEffect(() => {
-    fetchItems();
-    const interval = setInterval(fetchItems, 5000);
+    loadItems();
+    const interval = setInterval(loadItems, 5000);
     return () => clearInterval(interval);
   }, []);
 
-  const styles = {
-    container: {
-      textAlign: "center",
-      backgroundColor: "#3B2A24",
-      color: "white",
-      padding: "30px",
-      minHeight: "100vh",
-    },
-    header: {
-      backgroundColor: "#6E4B34",
-      padding: "15px",
-      borderRadius: "8px",
-      marginBottom: "20px",
-    },
-    itemBox: {
-      margin: "10px auto",
-      width: "70%",
-      borderBottom: "1px solid #6E4B34",
-      paddingBottom: "8px",
-    },
-    input: {
-      padding: "10px",
-      margin: "8px",
-      borderRadius: "6px",
-      border: "1px solid #444",
-      backgroundColor: "#6E4B34",
-      color: "white",
-      width: "200px",
-    },
-    button: {
-      padding: "10px 16px",
-      borderRadius: "6px",
-      backgroundColor: "gold",
-      border: "none",
-      fontWeight: "bold",
-      color: "#333",
-      cursor: "pointer",
-      marginLeft: "8px",
-    },
-    form: {
-      marginBottom: "30px",
-    },
-  };
-
   return (
-    <div style={styles.container}>
-      <div style={styles.header}>
+    <div className="container">
+      <div className="header">
         <h2>Live Item Sale Tracker</h2>
       </div>
 
-      <div style={styles.form}>
+      <div className="form">
         <input
-          style={styles.input}
+          className="input"
           type="text"
           placeholder="Item name"
           value={newItemName}
           onChange={(e) => setNewItemName(e.target.value)}
         />
         <input
-          style={styles.input}
+          className="input"
           type="number"
           placeholder="Price sold"
           value={newItemPrice}
           onChange={(e) => setNewItemPrice(e.target.value)}
         />
-        <button style={styles.button} onClick={addItem}>
+        <button className="button" onClick={handleAddItem}>
           Add Sale
         </button>
       </div>
 
       {items.map((item, index) => (
-        <div key={index} style={styles.itemBox}>
+        <div key={index} className="itemBox">
           <p>
             <strong>{item.item_name}</strong> — {item.price_sold.toLocaleString()} gp
           </p>

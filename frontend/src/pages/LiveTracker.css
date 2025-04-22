@@ -1,0 +1,47 @@
+.container {
+    text-align: center;
+    background-color: #3B2A24;
+    color: white;
+    padding: 30px;
+    min-height: 100vh;
+  }
+  
+  .header {
+    background-color: #6E4B34;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .itemBox {
+    margin: 10px auto;
+    width: 70%;
+    border-bottom: 1px solid #6E4B34;
+    padding-bottom: 8px;
+  }
+  
+  .input {
+    padding: 10px;
+    margin: 8px;
+    border-radius: 6px;
+    border: 1px solid #444;
+    background-color: #6E4B34;
+    color: white;
+    width: 200px;
+  }
+  
+  .button {
+    padding: 10px 16px;
+    border-radius: 6px;
+    background-color: gold;
+    border: none;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    margin-left: 8px;
+  }
+  
+  .form {
+    margin-bottom: 30px;
+  }
+  
