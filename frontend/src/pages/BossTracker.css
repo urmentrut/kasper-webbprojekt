@@ -1,0 +1,56 @@
+.container {
+    text-align: center;
+    padding: 20px;
+    background-color: #3B2A24;
+    min-height: 100vh;
+    color: white;
+}
+
+.header {
+    background-color: #6E4B34;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.input {
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 6px;
+    width: 200px;
+    margin-right: 10px;
+    background-color: #6E4B34;
+    color: white;
+}
+
+.button {
+    background-color: gold;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    color: #333;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.listItem {
+    margin: 10px auto;
+    padding: 10px 0;
+    width: 60%;
+    font-weight: 600;
+    color: white;
+    background-color: transparent;
+}
+
+.section {
+    margin-bottom: 30px;
+}
