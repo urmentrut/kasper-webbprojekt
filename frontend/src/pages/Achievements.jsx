@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { getAchievements, addAchievement, deleteAchievement } from '../services/achievementsApi';
 
 const Achievements = () => {
   const [achievements, setAchievements] = useState([]);
@@ -16,8 +16,8 @@ const Achievements = () => {
     setError(null);
 
     try {
-      const response = await axios.get(`http://127.0.0.1:5000/achievements/players/${username}/achievements`);
-      setAchievements(response.data);
+      const data = await getAchievements(username);
+      setAchievements(data);
     } catch (err) {
       console.error("Error with fetching:", err);
       setError("Could not fetch achievements.");
@@ -30,10 +30,7 @@ const Achievements = () => {
     if (!newAchievement.trim() || !username.trim()) return;
 
     try {
-      await axios.post(`http://127.0.0.1:5000/achievements/players/${username}/achievements`, {
-        achievement: newAchievement,
-      });
-
+      await addAchievement(username, newAchievement);
       setAchievements([...achievements, newAchievement]);
       setNewAchievement("");
     } catch (err) {
@@ -44,10 +41,7 @@ const Achievements = () => {
 
   const handleDeleteAchievement = async (achievementToDelete) => {
     try {
-      await axios.delete(`http://127.0.0.1:5000/achievements/players/${username}/achievements`, {
-        data: { achievement: achievementToDelete },
-      });
-
+      await deleteAchievement(username, achievementToDelete);
       setAchievements(achievements.filter((a) => a !== achievementToDelete));
     } catch (err) {
       console.error("Error when delete:", err);
